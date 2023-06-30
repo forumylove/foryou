@@ -102,17 +102,38 @@
 
 <button id="playButton">Play Audio</button>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const audio = document.getElementById('myAudio');
-    const playButton = document.getElementById('playButton');
+<script>document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('myAudio');
+  const playButton = document.getElementById('playButton');
 
+  const playAudioPromise = new Promise(function(resolve, reject) {
     playButton.addEventListener('click', function() {
       audio.play();
+
+      // Audio playback event handlers
+      audio.addEventListener('playing', function() {
+        resolve('Audio playback started');
+      });
+
+      audio.addEventListener('error', function() {
+        reject(new Error('Error playing audio'));
+      });
+    });
+  });
+
+  playAudioPromise
+    .then(function(message) {
+      console.log(message);
+      // Additional logic after audio playback started
+    })
+    .catch(function(error) {
+      console.error(error);
+      // Additional error handling logic
     });
 
-    playButton.click();
-  });
+  playButton.click();
+});
+
 </script>
 
 
