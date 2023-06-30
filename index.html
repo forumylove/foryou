@@ -96,10 +96,15 @@
       </div>
     </div>
   </div>
-  <audio autoplay loop>
+  <audio id="myAudio" autoplay loop>
     <source src="mymusic.mp3" type="audio/mp3">
   </audio>
   
-  <script src="script.js"></script>
+  <script src="script.js">
+  document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('myAudio');
+    audio.play();
+  });
+  </script>
 </body>
 </html>
